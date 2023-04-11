@@ -8,7 +8,6 @@ public class GridManager : MonoBehaviour
     [SerializeField] private Tile _tilePrefab;
     [SerializeField] private Transform _cam;
 
-
     void Start()
     {
 
@@ -16,17 +15,17 @@ public class GridManager : MonoBehaviour
     }
     void GenerateGrid()
     {
-        for (int x = 0; x < _width; x++)
+        for (int y = 0; y < _height; y++)
         {
-            for (int y = 0; y < _height; y++)
+            for (int x = 0; x < _width; x++)
             {
                 var spawnedTile = Instantiate(_tilePrefab, new Vector3(x, y), Quaternion.identity);
                 spawnedTile.name = $"Tile {x} {y}";
+                
+                var isOffset = ((x % 2 == 0) && (y % 2 != 0)) || ((x % 2 != 0) && (y % 2 == 0));
+                Debug.Log($"{isOffset}-{x}-{y}");
+                _tilePrefab.Init(isOffset, x, y);
 
-                var isOffset = (x % 2 == 0 && y % 2 != 0) || (x % 2 != 0 && y % 2 == 0);
-                var isInfoScreen = true || (x > 0 && x < 6 && y > 0 && y < 8);
-
-                _tilePrefab.PlayerInfo(isInfoScreen, isOffset);
 
 
             }

@@ -7,20 +7,12 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
     [SerializeField] private Color _baseColor, _offsetColor;
-    [SerializeField] private Color _playerInfoColor;
+
     [SerializeField] private SpriteRenderer _renderer;
     [SerializeField] private GameObject _highlight;
-    public Color Init(bool isOffset)
+    public void Init(bool isOffset, int x, int y)
     {
-        _renderer.color = isOffset ? _baseColor : _offsetColor;
-
-        return _renderer.color;
-    }
-
-    public void PlayerInfo(bool isInfoScreen, bool isOffset)
-    {
-        _renderer.color = isInfoScreen ? _playerInfoColor : Init(isOffset);
-
+        _renderer.color = isOffset ? _offsetColor : _baseColor;
     }
     void OnMouseEnter()
     {
